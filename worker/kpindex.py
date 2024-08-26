@@ -1,5 +1,9 @@
-import json
-from ..worker import get_data, source_links, pattern, OUTPUT, TEMP
+import os, sys, json
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
+from . import get_data, source_links, pattern, OUTPUT, TEMP
 
 kp_data = {
 	'nowcast': get_data(source_links['nowcast']['kp'], pattern['kp']),
