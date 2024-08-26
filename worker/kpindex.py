@@ -1,5 +1,5 @@
 import json
-from .worker import get_data, source_links, pattern, OUTPUT, TEMP
+from ..worker import get_data, source_links, pattern, OUTPUT, TEMP
 
 kp_data = {
 	'nowcast': get_data(source_links['nowcast']['kp'], pattern['kp']),
