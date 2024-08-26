@@ -1,10 +1,12 @@
 from pathlib import Path
-import requests, re, sys, os
+import requests, re, sys, os, urllib3
 
 ROOT = Path(__file__).parent.parent
 OUTPUT = ROOT / 'output'
 TEMP = ROOT / 'temp'
 WORKER = ROOT / 'worker'
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 sys.path.append(os.path.dirname(WORKER))
 
