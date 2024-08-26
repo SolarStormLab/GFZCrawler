@@ -1,9 +1,12 @@
 from pathlib import Path
-import requests, re
+import requests, re, sys, os
 
 ROOT = Path(__file__).parent.parent
 OUTPUT = ROOT / 'output'
 TEMP = ROOT / 'temp'
+WORKER = ROOT / 'worker'
+
+sys.path.append(os.path.dirname(WORKER))
 
 source_links = {
     'nowcast': {
