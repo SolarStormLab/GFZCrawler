@@ -20,19 +20,20 @@ jobs:
 
       - name: Run minute search
         run: |
-          python ./worker/kpindex.py
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
+          git stash --quiet
+          git pull --rebase --quiet
+        
+          python ./worker/kpindex.py
 
           update_file_if_needed() {
             local new_file=$1
             local existing_file=$2
         
             if ! cmp -s "$new_file" "$existing_file"; then
-                git stash --quiet
                 mv -f "$new_file" "$existing_file"
                 rm -f "$new_file"
-                git pull --rebase --quiet
                 git add "$existing_file"
                 git commit -m "$existing_file has been updated!"
                 git push --quiet
