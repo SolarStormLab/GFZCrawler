@@ -28,17 +28,17 @@ jobs:
           python ./worker/kpindex.py
 
           update_file_if_needed() {
-            local new_file=$1
-            local existing_file=$2
+            local temp_file="./temp/$1_new.json"
+            local output_file="./output/$1.json"
         
-            if ! cmp -s "$new_file" "$existing_file"; then
-                mv -f "$new_file" "$existing_file"
-                rm -f "$new_file"
-                git add "$existing_file"
-                git commit -m "$existing_file has been updated!"
+            if ! cmp -s "$temp_file" "$output_file"; then
+                mv -f "$temp_file" "$output_file"
+                rm -f "$temp_file"
+                git add "$output_file"
+                git commit -m "$1.json has been updated!"
                 git push --quiet
             fi
           }
           
-          update_file_if_needed "./temp/kp_nowcast_new.json" "./output/kp_nowcast.json" 
-          update_file_if_needed "./temp/kp_complete_new.json" "./output/kp_complete.json"
+          update_file_if_needed "kp_nowcast" 
+          update_file_if_needed "kp_complete"
