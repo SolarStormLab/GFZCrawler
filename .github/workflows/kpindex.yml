@@ -29,8 +29,9 @@ jobs:
             local existing_file=$2
         
             if ! cmp -s "$new_file" "$existing_file"; then
-                mv -f "$new_file" "$existing_file"
                 git stash --quiet
+                mv -f "$new_file" "$existing_file"
+                rm -f "$new_file"
                 git pull --rebase --quiet
                 git add "$existing_file"
                 git commit -m "$existing_file has been updated!"
