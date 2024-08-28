@@ -1,5 +1,4 @@
 import os, sys, json
-from compress_json import compress
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
@@ -40,6 +39,6 @@ def parse_data():
         json.dump(nowcast, file, indent=4)
         
     with open(TEMP / 'hp30_complete_new.json', 'w') as file:
-        json.dump(compress(complete), file, indent=4)
+        json.dump(complete), file, indent=4)
         
 parse_data()
