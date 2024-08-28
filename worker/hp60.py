@@ -12,17 +12,17 @@ hp60_data = {
 
 def hp60_format(data):
     return {
-			'year': int(data['year']),
-			'month': int(data['month']),
-			'day': int(data['day']),
-			'hh_h': float(data['hh_h']),
-			'hh_m': float(data['hh_m']),
-			'days': int(data['days']),
-			'days_m': float(data['days_m']),
-			'hp60': float(data['hp60']),
-			'ap60': int(data['ap60']),
-			'd': int(data['d']),
-		}
+		'year': int(data['year']),
+		'month': int(data['month']),
+		'day': int(data['day']),
+		'hh_h': float(data['hh_h']),
+		'hh_m': float(data['hh_m']),
+		'days': int(data['days']),
+		'days_m': float(data['days_m']),
+		'hp60': float(data['hp60']),
+		'ap60': int(data['ap60']),
+		'd': int(data['d']),
+	}
 
 def parse_data():
     
