@@ -32,13 +32,13 @@ def parse_data():
     for n in hp30_data['nowcast']:
         nowcast.append(hp30_format(n))
     
-    for c in hp30_data['complete']:
-        complete.append(hp30_format(c))
+    #for c in hp30_data['complete']:
+    #    complete.append(hp30_format(c))
         
     with open(TEMP / 'hp30_nowcast_new.json', 'w') as file:
         json.dump(nowcast, file, indent=4)
         
-    with open(TEMP / 'hp30_complete_new.json', 'w') as file:
-        json.dump(complete), file, indent=4)
+    #with open(TEMP / 'hp30_complete_new.json', 'w') as file:
+    #    json.dump(complete), file, indent=4)
         
 parse_data()
