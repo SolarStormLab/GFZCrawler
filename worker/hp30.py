@@ -39,6 +39,6 @@ def parse_data():
         json.dump(nowcast, file, indent=4)
         
     with open(TEMP / 'hp30_complete_new.json', 'w') as file:
-        json.dump(complete, file, indent=4)
+        json.dump(compress(complete), file, indent=4)
         
 parse_data()
