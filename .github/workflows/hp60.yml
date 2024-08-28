@@ -41,4 +41,4 @@ jobs:
           }
           
           update_file_if_needed "hp60_nowcast" 
-          update_file_if_needed "hp60_complete"
+          #update_file_if_needed "hp60_complete"
