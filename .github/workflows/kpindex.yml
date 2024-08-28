@@ -1,0 +1,44 @@
+name: get kp index
+
+on:
+  schedule:
+  - cron: "0 */3 * * *" # Runs at 00:00 UTC
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Kp Index update
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git stash --quiet
+          git pull --rebase --quiet
+        
+          python ./worker/kpindex.py
+
+          update_file_if_needed() {
+            local temp_file="./temp/$1_new.json"
+            local output_file="./output/$1.json"
+        
+            if ! cmp -s "$temp_file" "$output_file"; then
+                mv -f "$temp_file" "$output_file"
+                rm -f "$temp_file"
+                git add "$output_file"
+                git commit -m "$1.json has been updated!"
+                git push --quiet
+            fi
+          }
+          
+          update_file_if_needed "kp_nowcast" 
+          update_file_if_needed "kp_complete"
