@@ -1,4 +1,4 @@
-name: get hp30
+name: get hp30 & hp60
 
 on:
   schedule:
@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run Hp30 update
+      - name: Run Hp30/Hp60 update
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
@@ -26,6 +26,7 @@ jobs:
           git pull --rebase --quiet
         
           python ./worker/hp30.py
+          python ./worker/hp60.py
 
           update_file_if_needed() {
             local temp_file="./temp/$1_new.json"
@@ -42,3 +43,5 @@ jobs:
           
           update_file_if_needed "hp30_nowcast" 
           #update_file_if_needed "hp30_complete"
+          update_file_if_needed "hp60_nowcast" 
+          #update_file_if_needed "hp60_complete"
