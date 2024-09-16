@@ -1,0 +1,54 @@
+name: get hp30 & hp60 & kpindex
+
+on:
+  schedule:
+  - cron: "*/15 * * * *" # Runs every 15 min
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run GFZ update
+        run: |
+          # Define GIT-user for updates
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git stash --quiet
+          git pull --rebase --quiet
+        
+          # run worker for Hp30
+          python ./worker/hp30.py
+          # run worker for Hp60
+          python ./worker/hp60.py
+          # run worker for Kp-Index
+          python ./worker/kpindex.py
+
+          update_file_if_needed() {
+            local temp_file="./temp/$1_new.json"
+            local output_file="./output/$1.json"
+        
+            if ! cmp -s "$temp_file" "$output_file"; then
+                mv -f "$temp_file" "$output_file"
+                rm -f "$temp_file"
+                git add "$output_file"
+                git commit -m "$1.json has been updated!"
+                git push --quiet
+            fi
+          }
+          
+          update_file_if_needed "hp30_nowcast" 
+          #update_file_if_needed "hp30_complete"
+          update_file_if_needed "hp60_nowcast" 
+          #update_file_if_needed "hp60_complete"
+          update_file_if_needed "kp_nowcast" 
+          update_file_if_needed "kp_complete"
