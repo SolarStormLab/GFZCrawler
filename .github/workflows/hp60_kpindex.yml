@@ -1,4 +1,4 @@
-name: get hp30 & hp60 & kpindex
+name: get hp60 & kpindex
 
 on:
   schedule:
@@ -25,9 +25,7 @@ jobs:
           git config --global user.email 'actions@github.com'
           git stash --quiet
           git pull --rebase --quiet
-        
-          # run worker for Hp30
-          python ./worker/hp30.py
+          
           # run worker for Hp60
           python ./worker/hp60.py
           # run worker for Kp-Index
@@ -46,8 +44,6 @@ jobs:
             fi
           }
           
-          update_file_if_needed "hp30_nowcast" 
-          #update_file_if_needed "hp30_complete"
           update_file_if_needed "hp60_nowcast" 
           #update_file_if_needed "hp60_complete"
           update_file_if_needed "kp_nowcast" 
