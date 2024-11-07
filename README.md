@@ -1,6 +1,8 @@
 ﻿# GFZCrawler
 
-![Version](https://img.shields.io/github/manifest-json/v/SolarStormLab/GFZCrawler?filename=manifest.json&style=flat-square)
+![GitHub manifest version](https://img.shields.io/github/manifest-json/v/SolarStormLab/GFZCrawler?style=flat-square&label=Version)![GitHub License](https://img.shields.io/github/license/SolarStormLab/GFZCrawler?style=flat-square&label=License)
+
+
 
 
 Just mirroring some data from GFZ Potsdam as JSON files.
