@@ -1,5 +1,6 @@
 name: get hp60 & kpindex
 
+
 on:
   schedule:
   - cron: "*/15 * * * *" # Runs every 15 min
@@ -7,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v4
